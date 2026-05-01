@@ -1,0 +1,281 @@
+/* =====================================================
+   MAPsFitness — design tokens
+   All colors and sizing live here as CSS variables.
+   Theme switching and future logo swaps touch this file.
+   ===================================================== */
+
+:root {
+  /* Brand colors */
+  --navy: #0A1628;
+  --navy-elevated: #11203A;
+  --cardinal: #C8102E;
+  --cardinal-soft: rgba(200, 16, 46, 0.14);
+  --emerald: #34D399;
+  --powder: #006BA6;
+
+  /* Text on navy */
+  --text-primary: #E8EDF3;
+  --text-secondary: #6B7A8F;
+  --text-muted: #4A5870;
+
+  /* Surfaces (lifted from the navy base via white overlay) */
+  --surface-1: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.08);
+
+  /* Radii */
+  --radius-card: 14px;
+  --radius-input: 10px;
+  --radius-pill: 999px;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+
+  /* Layout */
+  --max-width-form: 280px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Light theme overrides — wired up but not toggled yet */
+[data-theme="light"] {
+  --navy: #F5F7FA;
+  --navy-elevated: #FFFFFF;
+  --text-primary: #0A1628;
+  --text-secondary: #4A5870;
+  --text-muted: #8A95A8;
+  --surface-1: rgba(10, 22, 40, 0.04);
+  --surface-2: rgba(10, 22, 40, 0.06);
+  --surface-3: rgba(10, 22, 40, 0.08);
+}
+
+/* =====================================================
+   Reset
+   ===================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--navy);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  overscroll-behavior: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* =====================================================
+   Login screen
+   ===================================================== */
+
+.login-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: max(24px, var(--safe-top)) 24px max(32px, var(--safe-bottom));
+}
+
+.login-screen__inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 32px 8px;
+}
+
+/* =====================================================
+   Badge — placeholder shield mark
+   Swap this SVG block for the final logo when ready.
+   ===================================================== */
+
+.badge {
+  width: 110px;
+  height: 130px;
+  margin-bottom: 24px;
+}
+
+.badge__shield {
+  fill: var(--cardinal);
+}
+
+.badge__tick {
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+
+.badge__letter {
+  font-family: var(--font-sans);
+  font-size: 80px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  fill: var(--navy);
+}
+
+/* =====================================================
+   Wordmark, tagline, hashtag
+   ===================================================== */
+
+.wordmark {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+}
+
+.wordmark__accent {
+  color: var(--cardinal);
+}
+
+.tagline {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.hashtag {
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: var(--cardinal);
+  margin-bottom: 40px;
+}
+
+/* =====================================================
+   Auth stack — buttons, divider, inputs
+   ===================================================== */
+
+.auth-stack {
+  width: 100%;
+  max-width: var(--max-width-form);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  padding: 14px 16px;
+  border-radius: var(--radius-input);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn--google {
+  background: #FFFFFF;
+  color: #0A1628;
+}
+
+.btn--google:hover {
+  opacity: 0.95;
+}
+
+.btn__google-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.btn--primary {
+  background: var(--cardinal);
+  color: #FFFFFF;
+  margin-top: 4px;
+}
+
+.btn--primary:hover {
+  opacity: 0.92;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+  opacity: 0.5;
+}
+
+.divider__line {
+  flex: 1;
+  height: 1px;
+  background: var(--text-primary);
+}
+
+.divider__label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input {
+  background: var(--surface-2);
+  padding: 13px 14px;
+  border-radius: var(--radius-input);
+  font-size: 14px;
+  color: var(--text-primary);
+  width: 100%;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input:focus {
+  background: var(--surface-3);
+  box-shadow: 0 0 0 1px var(--powder);
+}
+
+/* =====================================================
+   Reduced motion — respect the user's preference
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

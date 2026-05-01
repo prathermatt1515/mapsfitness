@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0A1628" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MAPsFitness" />
+  <title>MAPsFitness</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <main class="login-screen" aria-labelledby="brand">
+
+    <div class="login-screen__inner">
+
+      <svg class="badge" viewBox="0 0 140 160" role="img" aria-label="MAPsFitness shield badge">
+        <path class="badge__shield" d="M 14 14 L 126 14 L 126 88 Q 126 126 70 154 Q 14 126 14 88 Z" />
+        <line class="badge__tick" x1="70" y1="22" x2="70" y2="30" />
+        <line class="badge__tick" x1="70" y1="130" x2="70" y2="138" />
+        <line class="badge__tick" x1="20" y1="84" x2="28" y2="84" />
+        <line class="badge__tick" x1="112" y1="84" x2="120" y2="84" />
+        <text class="badge__letter" x="70" y="105" text-anchor="middle">s</text>
+      </svg>
+
+      <h1 class="wordmark" id="brand">map<span class="wordmark__accent">s</span>fitness</h1>
+
+      <p class="tagline">Discipline to Be Better</p>
+      <p class="hashtag">#RELENTLESS</p>
+
+      <div class="auth-stack">
+
+        <button class="btn btn--google" type="button" aria-label="Sign in with Google">
+          <svg class="btn__google-icon" viewBox="0 0 18 18" aria-hidden="true">
+            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
+            <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+          </svg>
+          Sign in with Google
+        </button>
+
+        <div class="divider" aria-hidden="true">
+          <span class="divider__line"></span>
+          <span class="divider__label">or</span>
+          <span class="divider__line"></span>
+        </div>
+
+        <input class="input" type="email" placeholder="Email" autocomplete="email" inputmode="email" />
+        <input class="input" type="password" placeholder="Password" autocomplete="current-password" />
+
+        <button class="btn btn--primary" type="button">Sign in</button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
