@@ -1,52 +1,60 @@
 /* =====================================================
    MAPsFitness — design tokens
-   All colors and sizing live here as CSS variables.
-   Theme switching and future logo swaps touch this file.
+   All colors, sizes, and theming live here.
    ===================================================== */
 
 :root {
-  /* Brand colors */
-  --navy: #0A1628;
-  --navy-elevated: #11203A;
+  /* Brand colors — locked */
   --cardinal: #C8102E;
   --cardinal-soft: rgba(200, 16, 46, 0.14);
+  --cardinal-bright: #E84458;
   --emerald: #34D399;
   --powder: #006BA6;
 
-  /* Text on navy */
-  --text-primary: #E8EDF3;
-  --text-secondary: #6B7A8F;
-  --text-muted: #4A5870;
-
-  /* Surfaces (lifted from the navy base via white overlay) */
-  --surface-1: rgba(255, 255, 255, 0.04);
-  --surface-2: rgba(255, 255, 255, 0.06);
-  --surface-3: rgba(255, 255, 255, 0.08);
+  /* Type scale */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
 
   /* Radii */
   --radius-card: 14px;
   --radius-input: 10px;
+  --radius-btn: 10px;
   --radius-pill: 999px;
-
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
 
   /* Layout */
   --max-width-form: 280px;
+  --header-height: 72px;
+  --nav-height: 72px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Light theme overrides — wired up but not toggled yet */
+/* Dark theme (default) */
+:root,
+[data-theme="dark"] {
+  --bg-base: #0A1628;
+  --bg-elevated: #11203A;
+  --text-primary: #E8EDF3;
+  --text-secondary: #6B7A8F;
+  --text-muted: #4A5870;
+  --surface-1: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.08);
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(10, 22, 40, 0.92);
+}
+
+/* Light theme overrides — flips on data-theme="light" */
 [data-theme="light"] {
-  --navy: #F5F7FA;
-  --navy-elevated: #FFFFFF;
+  --bg-base: #F5F7FA;
+  --bg-elevated: #FFFFFF;
   --text-primary: #0A1628;
   --text-secondary: #4A5870;
   --text-muted: #8A95A8;
   --surface-1: rgba(10, 22, 40, 0.04);
   --surface-2: rgba(10, 22, 40, 0.06);
   --surface-3: rgba(10, 22, 40, 0.08);
+  --border-hairline: rgba(10, 22, 40, 0.10);
+  --nav-bg: rgba(245, 247, 250, 0.92);
 }
 
 /* =====================================================
@@ -66,12 +74,13 @@ html, body {
 
 body {
   font-family: var(--font-sans);
-  background: var(--navy);
+  background: var(--bg-base);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
   overscroll-behavior: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 button {
@@ -79,6 +88,8 @@ button {
   border: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  color: inherit;
 }
 
 input {
@@ -89,8 +100,18 @@ input {
   color: inherit;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
 /* =====================================================
-   Login screen
+   LOGIN SCREEN
    ===================================================== */
 
 .login-screen {
@@ -107,56 +128,16 @@ input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
   padding: 32px 8px;
 }
 
-/* =====================================================
-   Badge — placeholder shield mark
-   Swap this SVG block for the final logo when ready.
-   ===================================================== */
-
-.badge {
-  width: 110px;
-  height: 130px;
+.login-logo {
+  width: min(280px, 75%);
+  height: auto;
   margin-bottom: 24px;
-}
-
-.badge__shield {
-  fill: var(--cardinal);
-}
-
-.badge__tick {
-  stroke: var(--navy);
-  stroke-width: 1.5;
-  opacity: 0.5;
-}
-
-.badge__letter {
-  font-family: var(--font-sans);
-  font-size: 80px;
-  font-weight: 800;
-  letter-spacing: -3px;
-  fill: var(--navy);
-}
-
-/* =====================================================
-   Wordmark, tagline, hashtag
-   ===================================================== */
-
-.wordmark {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-  margin-bottom: 14px;
-  color: var(--text-primary);
-}
-
-.wordmark__accent {
-  color: var(--cardinal);
 }
 
 .tagline {
@@ -175,8 +156,12 @@ input {
   margin-bottom: 40px;
 }
 
+.wordmark__accent {
+  color: var(--cardinal);
+}
+
 /* =====================================================
-   Auth stack — buttons, divider, inputs
+   AUTH STACK — buttons, divider, inputs
    ===================================================== */
 
 .auth-stack {
@@ -189,7 +174,7 @@ input {
 
 .btn {
   padding: 14px 16px;
-  border-radius: var(--radius-input);
+  border-radius: var(--radius-btn);
   font-size: 14px;
   font-weight: 500;
   text-align: center;
@@ -198,6 +183,7 @@ input {
   justify-content: center;
   gap: 10px;
   transition: transform 0.08s ease, opacity 0.15s ease;
+  width: 100%;
 }
 
 .btn:active {
@@ -270,7 +256,282 @@ input {
 }
 
 /* =====================================================
-   Reduced motion — respect the user's preference
+   APP SHELL
+   ===================================================== */
+
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 14px 18px 10px;
+  gap: 12px;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.app-header__badge {
+  width: 32px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.app-header__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-header__wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.app-header__title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Streak pill */
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--cardinal-soft);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.streak-pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cardinal);
+}
+
+.streak-pill__count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cardinal-bright);
+}
+
+.streak-pill__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--cardinal-bright);
+  opacity: 0.75;
+}
+
+/* Icon buttons (theme toggle) */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.icon-btn:active {
+  transform: scale(0.94);
+}
+
+.icon-btn:hover {
+  background: var(--surface-3);
+}
+
+.icon-btn__icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Show sun in dark mode (so user knows tap = go light), moon in light mode */
+.icon-btn__icon--moon {
+  display: none;
+}
+
+[data-theme="light"] .icon-btn__icon--sun {
+  display: none;
+}
+
+[data-theme="light"] .icon-btn__icon--moon {
+  display: block;
+}
+
+/* Profile button */
+.profile-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--cardinal);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease;
+}
+
+.profile-btn:active {
+  transform: scale(0.94);
+}
+
+.profile-btn__initial {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* =====================================================
+   MAIN — screen routing
+   ===================================================== */
+
+.app-main {
+  flex: 1;
+  padding: 8px 16px calc(var(--nav-height) + 24px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: block;
+}
+
+/* Placeholder cards (Piece 2 only — replaced with real content in later pieces) */
+.placeholder-card {
+  background: var(--surface-1);
+  border-radius: var(--radius-card);
+  padding: 18px 16px;
+  margin-bottom: 12px;
+}
+
+.placeholder-card--quiet {
+  background: transparent;
+  border: 0.5px solid var(--border-hairline);
+}
+
+.placeholder-card__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+}
+
+.placeholder-card__title {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.placeholder-card__sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* =====================================================
+   BOTTOM NAV
+   ===================================================== */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-top: 0.5px solid var(--border-hairline);
+  padding: 10px 8px calc(12px + var(--safe-bottom));
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  color: var(--text-secondary);
+  transition: color 0.15s ease, transform 0.08s ease;
+  min-width: 60px;
+}
+
+.nav-tab:active {
+  transform: scale(0.95);
+}
+
+.nav-tab.is-active {
+  color: var(--cardinal);
+}
+
+.nav-tab__icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.nav-tab.is-active .nav-tab__icon {
+  stroke-width: 2.3;
+}
+
+.nav-tab__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.nav-tab.is-active .nav-tab__label {
+  font-weight: 600;
+}
+
+/* =====================================================
+   Reduced motion — respect user preference
    ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
