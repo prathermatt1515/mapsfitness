@@ -140,6 +140,19 @@ img {
   margin-bottom: 24px;
 }
 
+/* Show dark-bg logo by default and in dark theme, light-bg logo in light theme */
+.login-logo--light {
+  display: none;
+}
+
+[data-theme="light"] .login-logo--dark {
+  display: none;
+}
+
+[data-theme="light"] .login-logo--light {
+  display: block;
+}
+
 .tagline {
   font-size: 15px;
   font-weight: 400;
