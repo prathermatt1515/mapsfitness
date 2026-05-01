@@ -117,4 +117,20 @@
     });
   });
 
+  // ---------------------------------------------------
+  // SERVICE WORKER
+  // Registers the service worker once the page has loaded
+  // so it doesn't compete for resources during initial render.
+  // ---------------------------------------------------
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function (err) {
+        // Service worker registration failed — app still works, just no offline.
+        // Surfaced in the console for debugging.
+        console.warn('Service worker registration failed:', err);
+      });
+    });
+  }
+
 })();
